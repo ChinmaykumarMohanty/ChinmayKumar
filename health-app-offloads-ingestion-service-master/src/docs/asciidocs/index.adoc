@@ -1,0 +1,93 @@
+= RESTful Services Ground Tool API Guide
+Thales Avionics;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+[[overview]]
+= Overview
+
+[[overview-http-verbs]]
+== HTTP verbs
+
+RESTful notes tries to adhere as closely as possible to standard HTTP and REST conventions in its
+use of HTTP verbs.
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource
+
+| `PUT`
+| Used to update an existing resource (full update)
+
+| `PATCH`
+| Used to update an existing resource, including partial updates
+
+| `DELETE`
+| Used to delete an existing resource
+|===
+
+RESTful notes tries to adhere as closely as possible to standard HTTP and REST conventions in its
+use of HTTP status codes.
+
+|===
+| Status code | Usage
+
+| `200 OK`
+| The request completed successfully
+
+| `201 Created`
+| A new resource has been created successfully. The resource's URI is available from the response's
+`Location` header
+
+| `204 No Content`
+| An update to an existing resource has been applied successfully
+
+| `400 Bad Request`
+| The request was malformed. The response body will include an error providing further information
+
+| `401 Unauthorized`
+| An invalid token was provided for the request
+
+| `403 Forbidden`
+| The user does not have permission to perform the request
+|===
+
+
+[[resources-uploads-offload]]
+=== Upload offload files
+
+[grid=rows]
+{set:cellbgcolor:whitesmoke}
+|===
+|[teal]#POST#{nbsp} {nbsp} {nbsp} {nbsp} [teal]#/api/v1/upload#
+|===
+{set:cellbgcolor!}
+
+==== Groups
+* everyone
+* scope : upload_offloads
+
+==== Request parameters
+
+include::{snippets}/upload-file/request-parameters.adoc[]
+
+==== Response fields
+
+include::{snippets}/upload-file/response-fields.adoc[]
+
+==== Example response
+
+include::{snippets}/upload-file/http-response.adoc[]
+
+==== CURL request
+
+include::{snippets}/upload-file/curl-request.adoc[]

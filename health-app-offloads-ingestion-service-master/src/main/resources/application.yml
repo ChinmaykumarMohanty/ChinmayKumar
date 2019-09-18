@@ -1,0 +1,10 @@
+# AWS S3 Properties
+amazonProperties:
+  endpointUrl: https://s3.console.aws.amazon.com
+  bucketName: health-payloads-dev
+  kalogsbucketName : ka-logs-dev
+  region: us-west-1
+  accessKey : 101
+  secretKey : 100
+  kalogs.accessKey : 102
+  kalogs.secretKey : 103

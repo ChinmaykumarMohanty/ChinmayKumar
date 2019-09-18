@@ -1,0 +1,6 @@
+# AWS S3 Properties...
+amazonProperties:
+  endpointUrl: https://s3.console.aws.amazon.com
+  bucketName: health-payloads-production
+  kalogsbucketName : production-melbourne
+  region: us-west-1
