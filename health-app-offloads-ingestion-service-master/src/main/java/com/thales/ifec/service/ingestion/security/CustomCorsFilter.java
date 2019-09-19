@@ -21,42 +21,58 @@ import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-
 @Component
 @Slf4j
 public class CustomCorsFilter implements Filter {
 
-  @Override
-  public void init(FilterConfig filterConfig) {
-    log.info("For Init method*********************");
-  }
+	@Override
+	public void init(FilterConfig filterConfig) {
+		log.info("For Init method*********************");
+	}
 
-  @Override
+	/*
+	 * @Override public void doFilter(ServletRequest req, ServletResponse res,
+	 * FilterChain chain) throws IOException, ServletException {
+	 * 
+	 * HttpServletResponse response = (HttpServletResponse) res; HttpServletRequest
+	 * request = (HttpServletRequest) req;
+	 * 
+	 * String originHeader = request.getHeader("Origin");
+	 * 
+	 * response.setHeader("Access-Control-Allow-Origin", originHeader);
+	 * response.setHeader("Access-Control-Allow-Methods",
+	 * "GET, OPTIONS, HEAD, PUT, POST");
+	 * response.setHeader("Access-Control-Allow-Headers",
+	 * "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+	 * 
+	 * if (request.getMethod().equals("OPTIONS")) {
+	 * response.setStatus(HttpServletResponse.SC_OK);
+	 * log.info("For OPTIONS header*********************"); return; }
+	 * 
+	 * chain.doFilter(req, res); }
+	 */
+
+	@Override
   public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
-      throws IOException, ServletException {
-
-    HttpServletResponse response = (HttpServletResponse) res;
-    HttpServletRequest request = (HttpServletRequest) req;
-
-    String originHeader = request.getHeader("Origin");
-
-    response.setHeader("Access-Control-Allow-Origin", originHeader);
-    response.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS, HEAD, PUT, POST");
-    response.setHeader("Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-
-    if (request.getMethod().equals("OPTIONS")) {
-      response.setStatus(HttpServletResponse.SC_OK);
-      log.info("For OPTIONS header*********************");
-      return;
-    }
-
-    chain.doFilter(req, res);
+          throws IOException, ServletException {
+      HttpServletResponse response = (HttpServletResponse) res;
+      HttpServletRequest request = (HttpServletRequest) req;
+      response.setHeader("Access-Control-Allow-Origin", "*");
+      response.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS, HEAD, PUT, POST");
+      response.setHeader("Access-Control-Allow-Headers",
+              "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-CSRF-TOKEN");
+      response.setHeader("Access-Control-Allow-Credentials", "true");
+      
+      if (request.getMethod().equals("OPTIONS")) {
+          response.setStatus(HttpServletResponse.SC_OK);
+          log.info("For OPTIONS header*********************");
+          return;
+      }      chain.doFilter(req, res);
   }
 
-  @Override
-  public void destroy() {
-    log.info("For destroy method*********************");
-  }
+	@Override
+	public void destroy() {
+		log.info("For destroy method*********************");
+	}
 
 }
